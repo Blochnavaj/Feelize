@@ -20,7 +20,7 @@ const PricingSection = () => {
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
           MVP in 2 Weeks
         </h2>
-        <p className="text-6xl font-extrabold text-purple-700 mb-4">$7,999</p>
+        <p className="text-6xl font-extrabold text-purple-700 mb-4">$5,999</p>
         <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto mb-8">
           Launch your complete, polished product in just two weeks — crafted with care, speed, and precision by the Feelize team.
         </p>
