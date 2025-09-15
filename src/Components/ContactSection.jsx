@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
-
+import ReferralGenerator from "./ReferralGenerator";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +14,21 @@ const Contact = () => {
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [emailWarning, setEmailWarning] = useState("");
+  const [referral, setReferral] = useState(localStorage.getItem('referral') || '');
+
+  // Store referral code from URL in localStorage and state
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('source');
+    if (source) {
+      localStorage.setItem('referral', source);
+      setReferral(source);
+      // Remove 'source' from the URL without reloading the page
+      params.delete('source');
+      const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, []);
 
   const validateEmail = (email) => {
     // Simple email regex
@@ -31,21 +46,42 @@ const Contact = () => {
     setIsSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY, // Replace with your Web3Forms access key
-          name: formData.name,
-          email: formData.email,
-          project: formData.project,
-          budget: formData.budget,
-          message: formData.message,
-          subject: "New Contact Form Submission from Feelize.com"
-        }),
-      });
+      // Get referral from state (not localStorage)
+      // Send to Web3Forms (for email)
+const res = await fetch("https://api.web3forms.com/submit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+    name: formData.name,
+    email: formData.email,
+    project: formData.project,
+    budget: formData.budget,
+    message: formData.message,
+    subject: "New Contact Form Submission from Feelize.com",
+    referral, // Use state
+  }),
+});
+
+//  Send to Make Webhook (for Google Sheets)
+await fetch(import.meta.env.VITE_MAKE_WEBHOOK_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: formData.name,
+    email: formData.email,
+    project: formData.project,
+    budget: formData.budget,
+    message: formData.message,
+    timestamp: new Date().toISOString(),
+    referral, // Use state
+  }),
+});
+
       if (res.ok) {
         setIsSubmitted(true);
         setFormData({ name: '', email: '', project: '', budget: '', message: '' });
@@ -146,6 +182,12 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+{/* 
+              <div className="p-10">
+      <h1 className="text-2xl font-bold mb-6">Become an Affiliate & Earn</h1>
+      <ReferralGenerator />
+    </div> */}
+
 
             <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-6">
               <h4 className="font-semibold text-gray-900 mb-3">Response Time</h4>
@@ -286,4 +328,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "framer-motion": "^12.18.1",
     "lucide-react": "^0.525.0",
     "phosphor-react": "^1.4.1",

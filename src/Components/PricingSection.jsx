@@ -1,6 +1,6 @@
  import React from "react";
 import LOGO_FEELIZE from "../assets/LOGO_FEELIZE.png";
-
+import { MeetingButton } from "./Meeting";
 const PricingSection = () => {
   const handleScrollToContact = (e) => {
     e.preventDefault();
@@ -37,14 +37,9 @@ const PricingSection = () => {
             <h3 className="text-xl font-semibold text-gray-900">Book a Call</h3>
             <p className="text-sm text-gray-500">Free 15-minute call with our core team</p>
           </div>
-          <a
-            href="https://calendly.com/navaj-bloch22/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-medium px-6 py-3 rounded-full text-base shadow-md transition-transform duration-300 hover:scale-105"
-          >
-            Schedule Call 📞
-          </a>
+         <MeetingButton className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-medium px-6 py-3 rounded-full text-base shadow-md transition-transform duration-300 hover:scale-105">
+        Schedule Call 📞
+      </MeetingButton>
         </div>
       </div>
     </section>

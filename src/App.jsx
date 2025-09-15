@@ -10,6 +10,8 @@ import Technologies from './Components/TechStackSection';
 import ScrollToTop from './utils/ScrollToTop';
 import ContactSection from './Components/ContactSection';
 import PricingSection from './Components/PricingSection';
+import { MeetingButton } from './Components/meeting';
+import AffiliateProgram from './routes/AffiliateProgram';
 function App() {
  
   return (
@@ -32,6 +34,7 @@ function App() {
           }
         />
         <Route path="/legal" element={<LegalPolicy />} />
+        <Route path="/affiliate-program" element={<AffiliateProgram />} />
       </Routes>
        <Footer />
     </>
