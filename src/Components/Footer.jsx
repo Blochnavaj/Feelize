@@ -15,6 +15,7 @@ const quickLinks = [
   { label: 'Services', to: 'featured-services' },
   { label: 'Process', to: 'process' },
   { label: 'Technologies', to: 'technologies' },
+  
 ];
 
 const Footer = () => {
@@ -95,7 +96,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-purple-400" />
-                <span className="text-gray-300">+91 7383034778</span>
+                <span className="text-gray-300">+1 (347) 694-5909</span>
               </li>
               <li className="flex items-center space-x-3">
                 <MapPin className="w-4 h-4 text-purple-400" />
@@ -113,11 +114,18 @@ const Footer = () => {
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link
+                to="/affiliate-program"
+                className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+              >
+                Affiliate Program
+              </Link>
+              <Link
                 to="/legal"
                 className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
               >
                 Privacy Policy
               </Link>
+              
               <a
                 href="#"
                 className="text-gray-400 hover:text-purple-400 text-sm transition-colors"

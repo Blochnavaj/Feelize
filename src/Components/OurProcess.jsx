@@ -1,7 +1,10 @@
 import React from 'react';
 import { MessageCircle, Lightbulb, Code, Rocket, CheckCircle } from 'lucide-react';
+import { getCalApi } from "@calcom/embed-react";
+import { useEffect, useRef } from "react";
+import { MeetingButton } from "./Meeting";
 
-const Process = () => {
+const OurProcess = () => {
   const steps = [
     {
       icon: MessageCircle,
@@ -36,7 +39,7 @@ const Process = () => {
   ];
 
   return (
-    <section id="process" className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
+    <section id="ourprocess" className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -92,11 +95,8 @@ const Process = () => {
             <p className="text-gray-600 mb-6">
               Let's discuss your ideas and see how we can bring them to life with our proven development process.
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 text-lg font-semibold"
-              onClick={() => window.open('https://calendly.com/navaj-bloch22/30min', '_blank')}
-            >
-              Schedule a Meeting with Feelize
-            </button>
+            {/* Meeting button only */}
+            <MeetingButton />
           </div>
         </div>
       </div>
@@ -104,4 +104,4 @@ const Process = () => {
   );
 };
 
-export default Process;
+export default OurProcess;
